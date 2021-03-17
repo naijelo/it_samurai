@@ -1,0 +1,12 @@
+.link {
+    text-decoration: none;
+    color: white;
+}
+.a:hover {
+    cursor: pointer;
+}
+.profile {
+    margin: 20px;
+    background-color: darkblue;
+    color: white;
+}
