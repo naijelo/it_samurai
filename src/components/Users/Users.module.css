@@ -1,0 +1,15 @@
+.users {
+    background-color: blue;
+    color: white;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    padding: 10px;
+}
+
+.users a {
+    color: white;
+}
+
+.selectedPage {
+    color: red;
+}

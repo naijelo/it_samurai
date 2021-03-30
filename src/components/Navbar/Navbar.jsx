@@ -19,7 +19,7 @@ const Navbar = () => {
                 <NavLink to="/music">Music</NavLink>
             </div>
             <div>
-                <NavLink to="/other">Other</NavLink>
+                <NavLink to="/users">Users</NavLink>
             </div>
         </nav>
     );
