@@ -2,7 +2,7 @@
     background-color: blue;
     color: white;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(1, 1fr);
     padding: 10px;
 }
 
@@ -12,4 +12,15 @@
 
 .selectedPage {
     color: red;
+}
+
+.page {
+    margin-right: 5px;
+}
+.page:hover {
+    cursor: pointer;
+}
+.usersCards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
 }
