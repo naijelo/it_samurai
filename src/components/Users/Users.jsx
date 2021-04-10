@@ -1,6 +1,9 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import userPhoto from "../../assets/userpic.png";
 import css from "./Users.module.css";
+import * as axios from "axios";
+import { usersAPI } from "../../api/api";
 
 
 let Users = (props) => {
@@ -21,14 +24,38 @@ let Users = (props) => {
             })}
         </div>
         <div className={css.usersCards}>
-        {props.users.map(u => <div key={u.id}>
+            {props.users.map(u => <div key={u.id}>
                 <div>
-                    <img src={u.photos.small != null ? u.photos.small : userPhoto} alt="" />
+                    <NavLink to={`/profile/${u.id}`}>
+                        <img src={u.photos.small != null ? u.photos.small : userPhoto} alt="" />
+                    </NavLink>
                 </div>
                 <div>
                     {u.followed
-                        ? <button onClick={() => { props.unfollow(u.id) }}>Unfollow</button>
-                        : <button onClick={() => { props.follow(u.id) }}>Follow</button>}
+                        ? <button disabled={props.followingInProgress.some(id => id === u.id)} 
+                        onClick={() => {
+                            props.toggleFollowingProgress(true, u.id);
+                            usersAPI.deleteUsers(u.id)
+                            .then(data => {
+                                if (data.resultCode == 0) {
+                                    props.unfollow(u.id);
+                                }
+                            props.toggleFollowingProgress(false, u.id);
+                            });
+                        }}>Unfollow</button>
+                        : <button disabled={props.followingInProgress.some(id => id === u.id)} 
+                            onClick={() => {
+                            props.toggleFollowingProgress(true, u.id);
+                            usersAPI.postUsers(u.id)
+                            .then(data => {
+                                if (data.resultCode == 0) {
+                                    props.follow(u.id);
+                                }
+                            props.toggleFollowingProgress(false, u.id);
+                            });
+                        }}>Follow</button>
+                    }
+                    
 
                 </div>
                 <div>{u.name}</div>
@@ -37,7 +64,7 @@ let Users = (props) => {
                 <div>"u.location.city"</div>
 
             </div>)
-        }
+            }
         </div>
     </div>
 }

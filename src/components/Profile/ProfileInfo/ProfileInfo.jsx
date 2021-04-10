@@ -1,14 +1,20 @@
 import React from "react";
+import Preloader from "../../common/Preloader/Preloader";
 import css from "./ProfileInfo.module.css";
 
-const ProfileInfo = () => {
+const ProfileInfo = (props) => {
+
+    if (!props.profile) {
+        return <Preloader/>
+    }
+
     return (
         <div>
             <div>
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Boris_Pasternak_1969.jpg/1200px-Boris_Pasternak_1969.jpg" alt="Pasternak"/>
             </div>
             <div>
-                description
+                <img src={props.profile.photos.large} alt="no userpic, sorry %("/>
+                <div>{props.profile.aboutMe ? props.profile.aboutMe : "status is empty"}</div>
             </div>
         </div>
     )
