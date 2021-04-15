@@ -8,6 +8,7 @@ import UsersContainer from "./components/Users/UsersContainer";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import { BrowserRouter, Route } from "react-router-dom";
 import ProfileContainer from "./components/Profile/ProfileContainer";
+import LoginPage from "./components/Login/Login";
 
 const App = () => {
   return (
@@ -23,6 +24,8 @@ const App = () => {
              render={ () => <UsersContainer /> } />
       <Route path="/news" component={News} />
       <Route path="/music" component={Music} />
+      <Route path="/login" 
+             render={ () => <LoginPage /> } />
     </div>
     </BrowserRouter>
   )
