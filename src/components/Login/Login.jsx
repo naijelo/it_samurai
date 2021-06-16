@@ -1,18 +1,29 @@
 import React from "react";
+import { connect } from "react-redux";
 import {Field, reduxForm} from "redux-form";
+import { required } from "../../utils/validators/validators";
+import {Input} from "../common/FormsControls/FormsControls";
+import { login } from "../../redux/auth-reducer";
+import { Redirect } from "react-router";
+import css from "./../common/FormsControls/FormsControls.module.css";
 
 const LoginForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field placeholder={"login"} name={"login"} component={"input"}/>
+                <Field placeholder={"Email"} name={"email"} 
+                validate={[required]} component={Input}/>
             </div>
             <div>
-                <Field placeholder={"Password"} name={"password"} component={"input"}/>
+                <Field placeholder={"Password"} name={"password"} type={"password"}
+                validate={[required]} component={Input}/>
             </div>
             <div>
-                <Field type={"checkbox"} name={"rememberMe"} component={"input"}/> Remember me
-                        </div>
+                <Field type={"checkbox"} name={"rememberMe"} component={Input}/> Remember me
+            </div>
+            { props.error && <div className={css.formSummaryError}>
+                {props.error}
+            </div> }
             <div>
                 <button>Login</button>
             </div>
@@ -26,8 +37,13 @@ const LoginReduxForm = reduxForm ({
 
 const Login = (props) => {
     const onSubmit = (formData) => {
-        console.log(formData);
+        props.login(formData.email, formData.password, formData.rememberMe);
     }
+
+    if (props.isAuth) {
+        return <Redirect to="/profile" />
+    }
+
     return (
         <div>
             Login
@@ -36,4 +52,8 @@ const Login = (props) => {
     )
 }
 
-export default Login;
+const mapStateToProps = (state) => ({
+        isAuth: state.auth.isAuth
+    })
+
+export default connect(mapStateToProps, {login})(Login);
