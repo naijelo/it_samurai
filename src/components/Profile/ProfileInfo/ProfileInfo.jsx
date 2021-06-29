@@ -2,22 +2,20 @@ import React from "react";
 import Preloader from "../../common/Preloader/Preloader";
 import css from "./ProfileInfo.module.css";
 import ProfileStatus from "./ProfileStatus";
+import userPhoto from "../../../assets/userpic.png";
 
-const ProfileInfo = (props) => {
+const ProfileInfo = ({profile, status, updateStatus}) => {
 
-    if (!props.profile) {
+    if (!profile) {
         return <Preloader/>
     }
 
     return (
         <div>
             <div>
-            </div>
-            <div>
-                <img src={props.profile.photos.large} alt="no userpic, sorry"/>
-                <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
+                <img src={profile.photos.small || userPhoto}/>
+                <ProfileStatus status={status} updateStatus={updateStatus}/>
 
-                {/* <div>{props.profile.aboutMe ? props.profile.aboutMe : "AboutMe field is empty"}</div> */}
             </div>
         </div>
     )
