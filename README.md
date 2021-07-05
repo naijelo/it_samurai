@@ -1,4 +1,4 @@
-# Getting Started with Create React App
+# Hello and Welcome
 This is a Demo version of Social Network.
 
 It was done acctording to course of React/Redux from It-kamasutra.
